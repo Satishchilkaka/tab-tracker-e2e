@@ -1,0 +1,68 @@
+name: Cypress E2E test
+on:
+  pull_request:
+jobs:
+  start-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get dir
+        run: |
+          pwd
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: Install
+        run: npm install
+        working-directory: /home/runner/work/tab-tracker-e2e/tab-tracker-e2e/server
+      - name: Start Server
+        id: server
+        if: success() || failure()
+        timeout-minutes: 1
+        run: npm run start-server
+        working-directory: /home/runner/work/tab-tracker-e2e/tab-tracker-e2e/server
+      - name: Run E2E tests
+        if: always()
+        uses: cypress-io/github-action@v5.0.8
+        with:
+          start: npm start
+          command: npm run cy-run
+          working-directory: /home/runner/work/tab-tracker-e2e/tab-tracker-e2e/client
+      # - name: config
+      #   run: |
+      #     pwd
+      # - name: Run e2e test
+      #   uses: cypress-io/github-action@v5.0.8
+      # - name: Run e2e test
+      #   run: npm run e2e-test
+      #   working-directory: /home/runner/work/tab-tracker-e2e/tab-tracker-e2e/client
+  # cypress-run:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: get dir
+  #       run: |
+  #         pwd
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Set up node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
+      # # - name: Install
+      # #   run: npm install
+      # #   working-directory: /home/runner/work/tab-tracker-e2e/tab-tracker-e2e/server
+      # - name: Start Server
+      #   run: npm run start-server
+      #   working-directory: /home/runner/work/tab-tracker-e2e/tab-tracker-e2e/server
+      # - name: config
+      #   run: |
+      #     pwd
+      # - name: Run E2E tests
+      #   uses: cypress-io/github-action@v5.0.8
+      #   with:
+      #     start: npm install
+      #     command: npm run e2e-test
+      #     working-directory: /home/runner/work/tab-tracker-e2e/tab-tracker-e2e/client
+  

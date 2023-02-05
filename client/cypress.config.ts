@@ -16,10 +16,11 @@ const cypressJsonConfig = {
   responseTimeout: 30000,
   waitToLoad: 7000,
   requestTimeout: 10000,
+  
   retries: 0,
   env: {
     environment: "local",
-    host: "http://localhost:8080/#/songs",
+    baseUrl: "http://localhost:8080/",
    apiTimeout: "25000",
    userEmail: "johndoe@gmail.com",
    userPassword: "123456",
