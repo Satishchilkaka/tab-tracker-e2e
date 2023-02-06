@@ -30,13 +30,13 @@ cd server
 npm install
 npm start
 ```
-### Run cypress e2e test locally without UI
+### Run cypress e2e test without UI
 ```
 cd client
 npm run cy-run
 ```
 
-### Run cypress e2e test locally with UI
+### Run cypress e2e test with UI
 ```
 Open new terminal:
 cd client
