@@ -36,7 +36,7 @@ cd client
 npm run cy-run
 ```
 
-### Run cypress e2e test locally without UI
+### Run cypress e2e test locally with UI
 ```
 Open new terminal:
 cd client
